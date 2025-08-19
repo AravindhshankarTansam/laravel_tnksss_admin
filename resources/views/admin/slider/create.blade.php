@@ -60,28 +60,27 @@
                 <textarea id="desc_ta" name="desc_ta" class="w-full border rounded px-3 py-2"></textarea>
             </div>
 
-<div class="flex items-center space-x-3">
-    <label class="relative inline-flex items-center cursor-pointer">
+<div x-data="{ isPublic: {{ isset($slider) && $slider->is_public ? 'true' : 'false' }} }" class="flex items-center space-x-3">
+    <label class="inline-flex relative items-center cursor-pointer">
         <input 
             type="checkbox" 
             name="is_public" 
             value="1" 
             class="sr-only peer"
-            {{ isset($slider) && $slider->is_public ? 'checked' : '' }}
+            x-model="isPublic"
         >
-        <div class="group peer ring-0 bg-gradient-to-tr from-rose-100 via-rose-400 to-rose-500 
-                    rounded-full outline-none duration-300 w-16 h-8 shadow-md
-                    after:duration-300 after:content-['✖️'] after:rounded-full after:absolute 
-                    after:bg-gray-50 after:h-6 after:w-6 after:top-1 after:left-1 
-                    after:-rotate-180 after:flex after:justify-center after:items-center 
-                    peer-checked:translate-x-0 peer-checked:bg-emerald-500 
-                    peer-checked:after:translate-x-8 peer-checked:after:content-['✔️'] 
-                    peer-hover:after:scale-95 peer-checked:after:rotate-0 
-                    peer-checked:bg-gradient-to-tr peer-checked:from-green-100 
-                    peer-checked:via-lime-400 peer-checked:to-lime-500">
+        <div class="w-12 h-6 bg-gray-300 rounded-full peer-checked:bg-green-500 
+                    relative after:content-[''] after:absolute after:left-1 after:top-1 
+                    after:w-4 after:h-4 after:bg-white after:rounded-full after:transition-all 
+                    peer-checked:after:translate-x-6">
         </div>
     </label>
+    <span class="font-medium text-gray-700" x-text="isPublic ? 'Active' : 'Inactive'"></span>
 </div>
+
+<!-- Make sure to include Alpine.js in your page -->
+<!-- <script src="//unpkg.com/alpinejs" defer></script> -->
+
 
             <!-- Buttons -->
             <div class="flex justify-between mt-4">

@@ -24,6 +24,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 });
 
 // Public sliders
-Route::get('/sliders', [SliderController::class, 'public'])->name('sliders.public');
+Route::get('/public/sliders', [SliderController::class, 'public'])->name('sliders.public');
 
 require __DIR__.'/auth.php';
