@@ -44,8 +44,10 @@
                         {!! Str::limit($gallery->desc_ta, 50) !!}
                     </td>
 
+                    <td class="border px-3 py-2">
+                        {{ \Carbon\Carbon::parse($gallery->date)->format('d/m/Y') }}
+                    </td>
 
-                    <td class="border px-3 py-2">{{ $gallery->date }}</td>
                     <td class="border px-3 py-2">
                         <span class="{{ $gallery->is_public ? 'bg-green-100 text-green-700 px-2 py-1 rounded' : 'bg-red-100 text-red-700 px-2 py-1 rounded' }}">
                             {{ $gallery->is_public ? 'Public' : 'Private' }}
