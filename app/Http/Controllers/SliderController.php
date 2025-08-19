@@ -23,7 +23,7 @@ class SliderController extends Controller
         $request->validate([
             'title_en' => 'required|string|max:255',
             'title_ta' => 'nullable|string|max:255',
-            'images.*' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'images.*' => 'required|image|mimes:jpg,jpeg,png|max:5048',
             'desc_en' => 'nullable|string',
             'desc_ta' => 'nullable|string',
             'is_public' => 'nullable|boolean',
