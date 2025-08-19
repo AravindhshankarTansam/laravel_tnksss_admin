@@ -39,6 +39,9 @@
                         <a href="{{ route('slider.index') }}">Home Page Slider</a>
                     </li>
                     <!-- You can add more dropdown items here -->
+                     <li class="py-1 hover:bg-gray-100">
+                        <a href="{{ route('aboutus.index') }}">About us</a>
+                    </li>
                 </ul>
             </li>
 
