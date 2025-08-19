@@ -38,14 +38,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/gallery/{gallery}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
     Route::put('/gallery/{gallery}', [GalleryController::class, 'update'])->name('gallery.update');
 
-
-
-
 });
 
 // Public 
 // sliders
 Route::get('/public/sliders', [SliderController::class, 'public'])->name('sliders.public');
+// About
 Route::get('/public/about', [AboutUsController::class, 'public'])->name('about.public');
+// Public galleries
+Route::get('/public/gallery', [GalleryController::class, 'public'])->name('gallery.public');
+
 
 require __DIR__.'/auth.php';

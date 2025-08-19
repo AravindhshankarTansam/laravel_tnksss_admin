@@ -8,7 +8,7 @@ use App\Models\Gallery;
 class GalleryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource (admin).
      */
     public function index()
     {
@@ -16,11 +16,17 @@ class GalleryController extends Controller
         return view('admin.gallery.index', compact('galleries'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         return view('admin.gallery.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -47,11 +53,17 @@ class GalleryController extends Controller
         return redirect()->route('gallery.index')->with('success', 'Gallery item created successfully.');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Gallery $gallery)
     {
         return view('admin.gallery.edit', compact('gallery'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, Gallery $gallery)
     {
         $request->validate([
@@ -79,4 +91,31 @@ class GalleryController extends Controller
         return redirect()->route('gallery.index')->with('success', 'Gallery item updated successfully.');
     }
 
+    /**
+     * Public API to get galleries with full image URLs.
+     */
+    public function public()
+    {
+        $galleries = Gallery::where('is_public', 1)->latest()->get()->map(function($gallery) {
+            return [
+                'id' => $gallery->id,
+                'title_en' => $gallery->title_en,
+                'title_ta' => $gallery->title_ta,
+                'desc_en' => $gallery->desc_en,
+                'desc_ta' => $gallery->desc_ta,
+                'date' => $gallery->date,
+                'image' => asset('storage/' . $gallery->image), // Full URL
+                'is_public' => $gallery->is_public,
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => $galleries
+        ], 200, [
+            'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers' => 'Content-Type, Authorization',
+        ]);
+    }
 }
