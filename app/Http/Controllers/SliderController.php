@@ -86,10 +86,19 @@ public function update(Request $request, Slider $slider) {
     return redirect()->route('slider.index')->with('success', 'Slider updated successfully!');
 }
 
+// Public sliders as JSON API
+public function public()
+{
+    $sliders = Slider::where('is_public', 1)->get();
 
-    // Public sliders
-    public function public() {
-        $sliders = Slider::where('is_public', 1)->get();
-        return view('public.sliders', compact('sliders'));
-    }
+    return response()->json([
+        'success' => true,
+        'data' => $sliders
+    ], 200, [
+        'Access-Control-Allow-Origin' => '*',   // 👈 allow all origins
+        'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers' => 'Content-Type, Authorization',
+    ]);
+}
+
 }

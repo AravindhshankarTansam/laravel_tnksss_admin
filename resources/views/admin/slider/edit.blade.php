@@ -68,31 +68,22 @@
             </div>
 
             <!-- Public Slider Toggle -->
-<div class="flex items-center space-x-3">
-    <label class="inline-flex items-center cursor-pointer">
-        <!-- Hidden checkbox -->
+<div x-data="{ isPublic: {{ isset($slider) && $slider->is_public ? 'true' : 'false' }} }" class="flex items-center space-x-3">
+    <label class="inline-flex relative items-center cursor-pointer">
         <input 
             type="checkbox" 
             name="is_public" 
+            value="1" 
             class="sr-only peer"
-            {{ isset($slider) && $slider->is_public ? 'checked' : '' }}
+            x-model="isPublic"
         >
-
-        <!-- Toggle background -->
-        <div class="w-16 h-8 bg-gray-300 rounded-full relative transition-colors duration-300 peer-checked:bg-green-500">
-            <!-- Toggle circle -->
-            <div class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300
-                        peer-checked:translate-x-8 flex items-center justify-center text-xs">
-                ✖️
-            </div>
+        <div class="w-12 h-6 bg-gray-300 rounded-full peer-checked:bg-green-500 
+                    relative after:content-[''] after:absolute after:left-1 after:top-1 
+                    after:w-4 after:h-4 after:bg-white after:rounded-full after:transition-all 
+                    peer-checked:after:translate-x-6">
         </div>
-
-        <!-- Label -->
-        <span class="ml-3 font-medium select-none">
-            <span class="inline peer-checked:hidden">Inactive</span>
-            <span class="hidden peer-checked:inline">Active</span>
-        </span>
     </label>
+    <span class="font-medium text-gray-700" x-text="isPublic ? 'Active' : 'Inactive'"></span>
 </div>
 
 
