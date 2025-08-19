@@ -42,6 +42,10 @@
                      <li class="py-1 hover:bg-gray-100">
                         <a href="{{ route('aboutus.index') }}">About us</a>
                     </li>
+                    <!-- Gallery -->
+                     <li class="py-1 hover:bg-gray-100">
+                        <a href="{{ route('gallery.index') }}">Gallery</a>
+                    </li>
                 </ul>
             </li>
 
